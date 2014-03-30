@@ -20,7 +20,7 @@
     </distributionManagement>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <defaultGoal>clean deploy</defaultGoal>
         <resources>
             <resource>
