@@ -7,8 +7,12 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NetDelegate extends JedisPubSub implements Runnable {
+
+    private final static Logger logger = Logger.getLogger(NetDelegate.class.getName());
 
     private final NetChannel netChannel;
 
@@ -37,6 +41,7 @@ public class NetDelegate extends JedisPubSub implements Runnable {
             obj = new JSONObject(data);
         } catch (JSONException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, null, ex);
             return;
         }
         for (NetCommandHandler commandHandler : commandHandlers) {

@@ -6,51 +6,48 @@ import org.json.JSONObject;
 import redis.clients.jedis.Jedis;
 
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class NetCommand {
-    /**
-     * The arguments of the command we're going to send.
-     */
-    private final HashMap<String, Object> args;
-    /**
-     * The name of the command.
-     */
-    private final String name;
 
+    private final static Logger logger = Logger.getLogger(NetCommand.class.getName());
+
+    private final HashMap<String, Object> args;
+    private final String name;
     private final NetChannel netChannel;
+
+    private final JSONObject jsonObject;
 
     public NetCommand(String name, NetChannel netChannel) {
         this.name = name;
         this.netChannel = netChannel;
+        this.jsonObject = new JSONObject();
         this.args = new HashMap<>();
     }
 
-    /**
-     * Add an argument
-     * @param arg With name
-     * @param o and value
-     * @return this object.
-     */
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
     public void addArg(String arg, Object o) {
         this.args.put(arg, o);
     }
 
-    public abstract JSONObject buildJSON();
+    public abstract void buildJSON();
 
-
-    public final JSONObject addCommandInfo(JSONObject jsonObject) {
+    private void addCommandInfo() {
         try {
             jsonObject.put("command", name);
             JSONObject argsObject = new JSONObject(args);
             jsonObject.put("data", argsObject);
         } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
+            logger.log(Level.SEVERE, null, e);
         }
-        return jsonObject;
     }
 
-    public void flush(JSONObject jsonObject) {
+    public void flush() {
+        addCommandInfo();
         Jedis jedis = JedisManager.getJedis();
         String id = jsonObject.optString("from", jsonObject.optString("to"));
         jedis.publish(netChannel.name()+"."+id, jsonObject.toString());
