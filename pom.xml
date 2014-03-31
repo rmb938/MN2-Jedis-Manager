@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.rmb938.jedis</groupId>
-    <artifactId>MN2-Jedis-Manager</artifactId>
+    <artifactId>MN2JedisManager</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <distributionManagement>
