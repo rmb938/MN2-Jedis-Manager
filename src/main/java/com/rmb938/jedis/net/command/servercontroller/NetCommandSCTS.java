@@ -4,7 +4,12 @@ import com.rmb938.jedis.net.NetChannel;
 import com.rmb938.jedis.net.NetCommand;
 import org.json.JSONException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class NetCommandSCTS extends NetCommand {
+
+    private final static Logger logger = Logger.getLogger(NetCommandSCTS.class.getName());
 
     private final int toServerPort;
     private final String fromServerController;
@@ -29,7 +34,7 @@ public class NetCommandSCTS extends NetCommand {
             getJsonObject().put("from", fromServerController);
             getJsonObject().put("to", toServerPort);
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, null, e);
         }
     }
 }
