@@ -1,5 +1,6 @@
 package com.rmb938.jedis.net.command.server;
 
+import com.google.common.base.Preconditions;
 import com.rmb938.jedis.net.NetChannel;
 import com.rmb938.jedis.net.NetCommand;
 import org.json.JSONException;
@@ -21,6 +22,8 @@ public class NetCommandSTSC extends NetCommand {
      */
     public NetCommandSTSC(String name, int fromServerPort) {
         super(name, NetChannel.SERVER_TO_SERVER_CONTROLLER);
+        Preconditions.checkNotNull(fromServerPort, "Net Command STSC fromServerPort cannot be null");
+        Preconditions.checkArgument(fromServerPort > 0, "Net Command STSC fromServerPort must be greater than 0");
         this.fromServerPort = fromServerPort;
         buildJSON();
     }

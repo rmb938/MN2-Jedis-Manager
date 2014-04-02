@@ -1,5 +1,6 @@
 package com.rmb938.jedis.net.command.servercontroller;
 
+import com.google.common.base.Preconditions;
 import com.rmb938.jedis.net.NetChannel;
 import com.rmb938.jedis.net.NetCommand;
 import org.json.JSONException;
@@ -24,6 +25,10 @@ public class NetCommandSCTS extends NetCommand {
      */
     public NetCommandSCTS(String name, String fromServerController, int toServerPort) {
         super(name, NetChannel.SERVER_CONTROLLER_TO_BUNGEE);
+        Preconditions.checkNotNull(fromServerController, "Net Command SCTS fromServerController cannot be null");
+        Preconditions.checkNotNull(toServerPort, "Net Command SCTS toServerPort cannot be null");
+        Preconditions.checkArgument(fromServerController.trim().isEmpty() == false, "Net Command SCTS fromServerController cannot be empty");
+        Preconditions.checkArgument(toServerPort > 0, "Net Command SCTS toServerPort must be greater than 0");
         this.fromServerController = fromServerController;
         this.toServerPort = toServerPort;
         buildJSON();

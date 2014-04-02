@@ -1,5 +1,6 @@
 package com.rmb938.jedis.net.command.servercontroller;
 
+import com.google.common.base.Preconditions;
 import com.rmb938.jedis.net.NetChannel;
 import com.rmb938.jedis.net.NetCommand;
 import org.json.JSONException;
@@ -21,6 +22,8 @@ public class NetCommandSCTB extends NetCommand {
      */
     public NetCommandSCTB(String name, String fromServerController) {
         super(name, NetChannel.SERVER_CONTROLLER_TO_BUNGEE);
+        Preconditions.checkNotNull(fromServerController, "Net Command SCTB fromServerController cannot be null");
+        Preconditions.checkArgument(fromServerController.trim().isEmpty() == false, "Net Command SCTB fromServerController cannot be empty");
         this.fromServerController = fromServerController;
         buildJSON();
     }

@@ -65,6 +65,7 @@
                                     <include>redis.clients:jedis:*</include>
                                     <include>org.json:json:*</include>
                                     <include>commons-pool:commons-pool:*</include>
+                                    <include>com.google.guava:guava:*</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
@@ -94,6 +95,12 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>10.0.1</version>
+            <type>jar</type>
+        </dependency>
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>

@@ -1,5 +1,6 @@
 package com.rmb938.jedis.net.command.networkcontroller;
 
+import com.google.common.base.Preconditions;
 import com.rmb938.jedis.net.NetChannel;
 import com.rmb938.jedis.net.NetCommand;
 import org.json.JSONException;
@@ -23,6 +24,8 @@ public class NetCommandNCTS extends NetCommand {
      */
     public NetCommandNCTS(String name, int toServerPort) {
         super(name, NetChannel.NETWORK_CONTROLLER_TO_SERVER);
+        Preconditions.checkNotNull(toServerPort, "Net Command NCTS toServerPort cannot be null");
+        Preconditions.checkArgument(toServerPort >= -1, "Net Command NCTS toServerPort must be greater or equal to -1");
         this.toServerPort = toServerPort;
         buildJSON();
     }

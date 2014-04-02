@@ -1,5 +1,6 @@
 package com.rmb938.jedis.net.command.bungee;
 
+import com.google.common.base.Preconditions;
 import com.rmb938.jedis.net.NetChannel;
 import com.rmb938.jedis.net.NetCommand;
 import org.json.JSONException;
@@ -24,6 +25,10 @@ public class NetCommandBTS extends NetCommand {
      */
     public NetCommandBTS(String name, String fromBungee, String toServerName) {
 		super(name, NetChannel.BUNGEE_TO_SERVER);
+        Preconditions.checkNotNull(fromBungee, "Net Command BTS fromBungee cannot be null");
+        Preconditions.checkNotNull(toServerName, "Net Command BTS toServerName cannot be null");
+        Preconditions.checkArgument(fromBungee.trim().isEmpty() == false, "Net Command BTS fromBungee cannot be blank");
+        Preconditions.checkArgument(toServerName.trim().isEmpty() == false, "Net Command BTS toServerName cannot be blank");
         this.fromBungee = fromBungee;
 		this.toServerName = toServerName;
         buildJSON();

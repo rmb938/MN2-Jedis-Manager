@@ -1,5 +1,6 @@
 package com.rmb938.jedis.net.command.networkcontroller;
 
+import com.google.common.base.Preconditions;
 import com.rmb938.jedis.net.NetChannel;
 import com.rmb938.jedis.net.NetCommand;
 import org.json.JSONException;
@@ -21,6 +22,8 @@ public class NetCommandNCTSC extends NetCommand {
      */
     public NetCommandNCTSC(String name, String toServerController) {
         super(name, NetChannel.NETWORK_CONTROLLER_TO_SERVER_CONTROLLER);
+        Preconditions.checkNotNull(toServerController, "Net Command NCTSC toServerController cannot be null");
+        Preconditions.checkArgument(toServerController.trim().isEmpty() == false, "Net Command NCTSC toServerController cannot be empty");
         this.toServerController = toServerController;
     }
 
