@@ -18,11 +18,11 @@ public class NetCommandSTSC extends NetCommand {
     /**
      * A Command that goes from a server to its server controller
      * @param name - name of the command
-     * @param toServerController - the internal IP of the server controller
      * @param fromServerName - format serverName.port
      *                     If port == * command is a broadcast to all servers
+     * @param toServerController - the internal IP of the server controller
      */
-    public NetCommandSTSC(String name, String toServerController, String fromServerName) {
+    public NetCommandSTSC(String name, String fromServerName, String toServerController) {
         super(name, NetChannel.SERVER_TO_SERVER_CONTROLLER);
         Preconditions.checkNotNull(toServerController, "Net Command STSC toServerController cannot be null");
         Preconditions.checkNotNull(fromServerName, "Net Command STSC fromServerName cannot be null");
