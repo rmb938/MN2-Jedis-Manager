@@ -21,6 +21,7 @@ public class NetCommandSCTS extends NetCommand {
      * @param fromServerController - the server controller's internal ip address
      * @param toServerName - format serverName.port
      *                     If port == * command is a broadcast to all servers
+     *                     run by this controller
      */
     public NetCommandSCTS(String name, String fromServerController, String toServerName) {
         super(name, NetChannel.SERVER_CONTROLLER_TO_BUNGEE);
