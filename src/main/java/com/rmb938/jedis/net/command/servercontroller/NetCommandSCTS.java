@@ -12,32 +12,31 @@ public class NetCommandSCTS extends NetCommand {
 
     private final static Logger logger = Logger.getLogger(NetCommandSCTS.class.getName());
 
-    private final int toServerPort;
+    private final String toServerName;
     private final String fromServerController;
 
     /**
      * A Command that goes from a server controller to a server
      * @param name - the name of the command
      * @param fromServerController - the server controller's internal ip address
-     * @param toServerPort - server port
-     *                     If toServerPort == -1 message is a broadcast to all
-     *                     servers managed by the server controller
+     * @param toServerName - format serverName.port
+     *                     If port == * command is a broadcast to all servers
      */
-    public NetCommandSCTS(String name, String fromServerController, int toServerPort) {
+    public NetCommandSCTS(String name, String fromServerController, String toServerName) {
         super(name, NetChannel.SERVER_CONTROLLER_TO_BUNGEE);
         Preconditions.checkNotNull(fromServerController, "Net Command SCTS fromServerController cannot be null");
-        Preconditions.checkNotNull(toServerPort, "Net Command SCTS toServerPort cannot be null");
+        Preconditions.checkNotNull(toServerName, "Net Command SCTS toServerPort cannot be null");
         Preconditions.checkArgument(fromServerController.trim().isEmpty() == false, "Net Command SCTS fromServerController cannot be empty");
-        Preconditions.checkArgument(toServerPort > 0, "Net Command SCTS toServerPort must be greater than 0");
+        Preconditions.checkArgument(toServerName.trim().isEmpty() == false, "Net Command SCTS toServerName cannot be empty");
         this.fromServerController = fromServerController;
-        this.toServerPort = toServerPort;
+        this.toServerName = toServerName;
         buildJSON();
     }
 
     public void buildJSON() {
         try {
             getJsonObject().put("from", fromServerController);
-            getJsonObject().put("to", toServerPort);
+            getJsonObject().put("to", toServerName);
         } catch (JSONException e) {
             logger.log(Level.SEVERE, null, e);
         }

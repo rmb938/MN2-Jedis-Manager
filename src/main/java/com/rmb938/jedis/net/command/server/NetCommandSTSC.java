@@ -13,28 +13,29 @@ public class NetCommandSTSC extends NetCommand {
     private final static Logger logger = Logger.getLogger(NetCommandSTSC.class.getName());
 
     private final String toServerController;
-    private final int fromServerPort;
+    private final String fromServerName;
 
     /**
      * A Command that goes from a server to its server controller
      * @param name - name of the command
      * @param toServerController - the internal IP of the server controller
-     * @param fromServerPort - serverName.port
+     * @param fromServerName - format serverName.port
+     *                     If port == * command is a broadcast to all servers
      */
-    public NetCommandSTSC(String name, String toServerController, int fromServerPort) {
+    public NetCommandSTSC(String name, String toServerController, String fromServerName) {
         super(name, NetChannel.SERVER_TO_SERVER_CONTROLLER);
         Preconditions.checkNotNull(toServerController, "Net Command STSC toServerController cannot be null");
-        Preconditions.checkNotNull(fromServerPort, "Net Command STSC fromServerPort cannot be null");
-        Preconditions.checkArgument(fromServerPort > 0, "Net Command STSC fromServerPort must be greater than 0");
+        Preconditions.checkNotNull(fromServerName, "Net Command STSC fromServerName cannot be null");
+        Preconditions.checkArgument(fromServerName.trim().isEmpty() == false, "Net Command STSC fromServerName cannot be empty");
         Preconditions.checkArgument(toServerController.trim().isEmpty() == false, "Net Command STSC toServerController cannot be empty");
         this.toServerController = toServerController;
-        this.fromServerPort = fromServerPort;
+        this.fromServerName = fromServerName;
         buildJSON();
     }
 
     public void buildJSON() {
         try {
-            getJsonObject().put("from", fromServerPort);
+            getJsonObject().put("from", fromServerName);
             getJsonObject().put("to", toServerController);
         } catch (JSONException e) {
             logger.log(Level.SEVERE, null, e);
