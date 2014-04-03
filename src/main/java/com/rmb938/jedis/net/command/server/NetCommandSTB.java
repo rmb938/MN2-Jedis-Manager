@@ -17,7 +17,7 @@ public class NetCommandSTB extends NetCommand {
     /**
      * A Command that goes from a Server to all bungee instances
      * @param name - command name
-     * @param fromServerName - format serverName.port
+     * @param fromServerName - format serverIP.serverName.port
      */
     public NetCommandSTB(String name, String fromServerName) {
 		super(name, NetChannel.SERVER_TO_BUNGEE);

@@ -19,7 +19,7 @@ public class NetCommandSTS extends NetCommand {
      * A Command that goes from a server to one or many servers
      * @param name - command name
      * @param fromServerName - format serverName.port
-     * @param toServerName - format serverName.port
+     * @param toServerName - format serverIP.serverName.port
      *                     If port == * command is a broadcast to all servers
      */
     public NetCommandSTS(String name, String fromServerName, String toServerName) {

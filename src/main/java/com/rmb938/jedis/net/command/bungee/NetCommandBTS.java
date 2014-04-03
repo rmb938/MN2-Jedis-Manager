@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.rmb938.jedis.net.NetChannel;
 import com.rmb938.jedis.net.NetCommand;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +19,7 @@ public class NetCommandBTS extends NetCommand {
      * A Command that goes from a bungee instance to one or many servers
      * @param name - the name of the command
      * @param fromBungee - the internal bungee IP address
-     * @param toServerName - format serverName.port
+     * @param toServerName - format serverIP.serverName.port
      *                     If port == * command is a broadcast to all servers
      */
     public NetCommandBTS(String name, String fromBungee, String toServerName) {
