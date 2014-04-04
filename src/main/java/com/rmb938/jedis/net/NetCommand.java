@@ -53,8 +53,7 @@ public abstract class NetCommand {
     public void flush() {
         addCommandInfo();
         Jedis jedis = JedisManager.getJedis();
-        String id = jsonObject.optString("from", jsonObject.optString("to"));
-        jedis.publish(netChannel.name()+"."+id, jsonObject.toString());
+        jedis.publish(netChannel.name(), jsonObject.toString());
         JedisManager.returnJedis(jedis);
     }
 }

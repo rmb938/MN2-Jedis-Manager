@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class NetCommandSCTSC extends NetCommand {
 
-    private final static Logger logger = Logger.getLogger(NetCommandSCTS.class.getName());
+    private final static Logger logger = Logger.getLogger(NetCommandSCTSC.class.getName());
 
     private final String toServerController;
     private final String fromServerController;

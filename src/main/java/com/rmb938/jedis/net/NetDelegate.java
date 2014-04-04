@@ -24,7 +24,7 @@ public class NetDelegate extends JedisPubSub implements Runnable {
 
     @Override
     public void onMessage(String channel, String data) {
-        NetChannel netChannel = NetChannel.getChannelFromName(channel.split("\\.")[0]);
+        NetChannel netChannel = NetChannel.getChannelFromName(channel);
         if (netChannel == null) {
             System.out.println("Unknown NetChannel for "+channel);
             return;
