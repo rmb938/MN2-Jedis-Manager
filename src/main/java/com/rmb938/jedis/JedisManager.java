@@ -21,6 +21,10 @@ public class JedisManager {
         logger.info("Connecting to Redis server at "+address);
         JedisPoolConfig config = new JedisPoolConfig();
         config.setTestOnBorrow(true);
+        config.setMaxTotal(200);
+        config.setMaxIdle(50);
+        config.setTestWhileIdle(true);
+        config.setMaxWaitMillis(500);
         jedisPool = new JedisPool(config, address);
     }
 

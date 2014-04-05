@@ -23,7 +23,7 @@ public abstract class NetCommand {
     public NetCommand(String name, NetChannel netChannel) {
         Preconditions.checkNotNull(name, "Net Command name cannot be null");
         Preconditions.checkNotNull(netChannel, "Net Command channel cannot be null");
-        Preconditions.checkArgument(name.trim().isEmpty(), "Net Command name cannot be blank");
+        Preconditions.checkArgument(name.trim().isEmpty() == false, "Net Command name cannot be blank");
         this.name = name;
         this.netChannel = netChannel;
         this.jsonObject = new JSONObject();

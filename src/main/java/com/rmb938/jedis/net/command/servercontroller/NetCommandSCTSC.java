@@ -23,7 +23,7 @@ public class NetCommandSCTSC extends NetCommand {
      *                     If toServerController == * command is a broadcast to all servers controllers
      */
     public NetCommandSCTSC(String name, String fromServerController, String toServerController) {
-        super(name, NetChannel.SERVER_CONTROLLER_TO_BUNGEE);
+        super(name, NetChannel.SERVER_CONTROLLER_TO_SERVER_CONTROLLER);
         Preconditions.checkNotNull(fromServerController, "Net Command SCTS fromServerController cannot be null");
         Preconditions.checkNotNull(toServerController, "Net Command SCTS toServerController cannot be null");
         Preconditions.checkArgument(fromServerController.trim().isEmpty() == false, "Net Command SCTS fromServerController cannot be empty");

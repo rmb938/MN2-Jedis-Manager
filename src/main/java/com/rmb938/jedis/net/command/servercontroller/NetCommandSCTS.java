@@ -24,7 +24,7 @@ public class NetCommandSCTS extends NetCommand {
      *                     run by this controller
      */
     public NetCommandSCTS(String name, String fromServerController, String toServerUUID) {
-        super(name, NetChannel.SERVER_CONTROLLER_TO_BUNGEE);
+        super(name, NetChannel.SERVER_CONTROLLER_TO_SERVER);
         Preconditions.checkNotNull(fromServerController, "Net Command SCTS fromServerController cannot be null");
         Preconditions.checkNotNull(toServerUUID, "Net Command SCTS toServerPort cannot be null");
         Preconditions.checkArgument(fromServerController.trim().isEmpty() == false, "Net Command SCTS fromServerController cannot be empty");
