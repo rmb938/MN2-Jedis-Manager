@@ -13,30 +13,30 @@ public class NetCommandBTS extends NetCommand {
     private final static Logger logger = Logger.getLogger(NetCommandBTS.class.getName());
 
     private final String fromBungee;
-	private final String toServerName;
+	private final String toServerUUID;
 
     /**
      * A Command that goes from a bungee instance to one or many servers
      * @param name - the name of the command
      * @param fromBungee - the internal bungee IP address
-     * @param toServerName - format serverIP.serverName.port
-     *                     If port == * command is a broadcast to all servers
+     * @param toServerUUID - server UUID
+     *                     If toServerUUID == * command is a broadcast to all servers
      */
-    public NetCommandBTS(String name, String fromBungee, String toServerName) {
+    public NetCommandBTS(String name, String fromBungee, String toServerUUID) {
 		super(name, NetChannel.BUNGEE_TO_SERVER);
         Preconditions.checkNotNull(fromBungee, "Net Command BTS fromBungee cannot be null");
-        Preconditions.checkNotNull(toServerName, "Net Command BTS toServerName cannot be null");
+        Preconditions.checkNotNull(toServerUUID, "Net Command BTS toServerUUID cannot be null");
         Preconditions.checkArgument(fromBungee.trim().isEmpty() == false, "Net Command BTS fromBungee cannot be blank");
-        Preconditions.checkArgument(toServerName.trim().isEmpty() == false, "Net Command BTS toServerName cannot be blank");
+        Preconditions.checkArgument(toServerUUID.trim().isEmpty() == false, "Net Command BTS toServerUUID cannot be blank");
         this.fromBungee = fromBungee;
-		this.toServerName = toServerName;
+		this.toServerUUID = toServerUUID;
         buildJSON();
 	}
 
 	public void buildJSON() {
 		try {
             getJsonObject().put("from", fromBungee);
-			getJsonObject().put("to", toServerName);
+			getJsonObject().put("to", toServerUUID);
 		} catch (JSONException e) {
             logger.log(Level.SEVERE, null, e);
 		}

@@ -12,32 +12,32 @@ public class NetCommandSCTS extends NetCommand {
 
     private final static Logger logger = Logger.getLogger(NetCommandSCTS.class.getName());
 
-    private final String toServerName;
+    private final String toServerUUID;
     private final String fromServerController;
 
     /**
      * A Command that goes from a server controller to a server
      * @param name - the name of the command
      * @param fromServerController - the server controller's internal ip address
-     * @param toServerName - format serverName.port
-     *                     If port == * command is a broadcast to all servers
+     * @param toServerUUID - serverUUID
+     *                     If toServerUUID == * command is a broadcast to all servers
      *                     run by this controller
      */
-    public NetCommandSCTS(String name, String fromServerController, String toServerName) {
+    public NetCommandSCTS(String name, String fromServerController, String toServerUUID) {
         super(name, NetChannel.SERVER_CONTROLLER_TO_BUNGEE);
         Preconditions.checkNotNull(fromServerController, "Net Command SCTS fromServerController cannot be null");
-        Preconditions.checkNotNull(toServerName, "Net Command SCTS toServerPort cannot be null");
+        Preconditions.checkNotNull(toServerUUID, "Net Command SCTS toServerPort cannot be null");
         Preconditions.checkArgument(fromServerController.trim().isEmpty() == false, "Net Command SCTS fromServerController cannot be empty");
-        Preconditions.checkArgument(toServerName.trim().isEmpty() == false, "Net Command SCTS toServerName cannot be empty");
+        Preconditions.checkArgument(toServerUUID.trim().isEmpty() == false, "Net Command SCTS toServerUUID cannot be empty");
         this.fromServerController = fromServerController;
-        this.toServerName = toServerName;
+        this.toServerUUID = toServerUUID;
         buildJSON();
     }
 
     public void buildJSON() {
         try {
             getJsonObject().put("from", fromServerController);
-            getJsonObject().put("to", toServerName);
+            getJsonObject().put("to", toServerUUID);
         } catch (JSONException e) {
             logger.log(Level.SEVERE, null, e);
         }

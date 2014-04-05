@@ -12,24 +12,24 @@ public class NetCommandSTB extends NetCommand {
 
     private final static Logger logger = Logger.getLogger(NetCommandSTB.class.getName());
 
-	private final String fromServerName;
+	private final String fromServerUUID;
 
     /**
      * A Command that goes from a Server to all bungee instances
      * @param name - command name
-     * @param fromServerName - format serverIP.serverName.port
+     * @param fromServerUUID - server UUID
      */
-    public NetCommandSTB(String name, String fromServerName) {
+    public NetCommandSTB(String name, String fromServerUUID) {
 		super(name, NetChannel.SERVER_TO_BUNGEE);
-        Preconditions.checkNotNull(fromServerName, "Net Command STB fromServerName cannot be null");
-        Preconditions.checkArgument(fromServerName.trim().isEmpty() == false, "Net Command STB fromServerName cannot be empty");
-		this.fromServerName = fromServerName;
+        Preconditions.checkNotNull(fromServerUUID, "Net Command STB fromServerUUID cannot be null");
+        Preconditions.checkArgument(fromServerUUID.trim().isEmpty() == false, "Net Command STB fromServerUUID cannot be empty");
+		this.fromServerUUID = fromServerUUID;
         buildJSON();
 	}
 
 	public void buildJSON() {
 		try {
-			getJsonObject().put("from", fromServerName);
+			getJsonObject().put("from", fromServerUUID);
 		} catch (JSONException e) {
             logger.log(Level.SEVERE, null, e);
 		}

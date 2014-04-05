@@ -1,8 +1,6 @@
 package com.rmb938.jedis.example.bukkit;
 
 import com.rmb938.jedis.JedisManager;
-import com.rmb938.jedis.net.NetCommandHandler;
-import com.rmb938.jedis.net.command.bungee.NetCommandBTS;
 import com.rmb938.jedis.net.command.server.NetCommandSTB;
 import org.bukkit.plugin.java.JavaPlugin;
 

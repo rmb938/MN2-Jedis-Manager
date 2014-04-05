@@ -12,31 +12,31 @@ public class NetCommandSTS extends NetCommand {
 
     private final static Logger logger = Logger.getLogger(NetCommandSTS.class.getName());
 
-	private final String fromServerName;
-	private final String toServerName;
+	private final String fromServerUUID;
+	private final String toServerUUID;
 
     /**
      * A Command that goes from a server to one or many servers
      * @param name - command name
-     * @param fromServerName - format serverName.port
-     * @param toServerName - format serverIP.serverName.port
-     *                     If port == * command is a broadcast to all servers
+     * @param fromServerUUID - server UUID
+     * @param toServerUUID - server UUID
+     *                     If toServerUUID == * command is a broadcast to all servers
      */
-    public NetCommandSTS(String name, String fromServerName, String toServerName) {
+    public NetCommandSTS(String name, String fromServerUUID, String toServerUUID) {
 		super(name, NetChannel.SERVER_TO_SERVER);
-        Preconditions.checkNotNull(fromServerName, "Net Command STS fromServerName cannot be null");
-        Preconditions.checkNotNull(toServerName, "Net Command STS toServerName cannot be null");
-        Preconditions.checkArgument(fromServerName.trim().isEmpty() == false, "Net Command STS fromServerName cannot be empty");
-        Preconditions.checkArgument(toServerName.trim().isEmpty() == false, "Net Command STS toServerName cannot be empty");
-		this.fromServerName = fromServerName;
-		this.toServerName = toServerName;
+        Preconditions.checkNotNull(fromServerUUID, "Net Command STS fromServerUUID cannot be null");
+        Preconditions.checkNotNull(toServerUUID, "Net Command STS toServerUUID cannot be null");
+        Preconditions.checkArgument(fromServerUUID.trim().isEmpty() == false, "Net Command STS fromServerUUID cannot be empty");
+        Preconditions.checkArgument(toServerUUID.trim().isEmpty() == false, "Net Command STS toServerUUID cannot be empty");
+		this.fromServerUUID = fromServerUUID;
+		this.toServerUUID = toServerUUID;
         buildJSON();
 	}
 
 	public void buildJSON() {
 		try {
-			getJsonObject().put("from", fromServerName);
-            getJsonObject().put("to", toServerName);
+			getJsonObject().put("from", fromServerUUID);
+            getJsonObject().put("to", toServerUUID);
 		} catch (JSONException e) {
             logger.log(Level.SEVERE, null, e);
 		}
