@@ -52,8 +52,17 @@ public abstract class NetCommand {
 
     public void flush() {
         addCommandInfo();
-        Jedis jedis = JedisManager.getJedis();
-        jedis.publish(netChannel.name(), jsonObject.toString());
-        JedisManager.returnJedis(jedis);
+        Jedis jedis = null;
+        try {
+            jedis = JedisManager.getJedis();
+            jedis.publish(netChannel.name(), jsonObject.toString());
+        } catch (Exception e) {
+            logger.severe("Unable to send NetCommand "+netChannel.name()+" Contents: "+jsonObject.toString());
+        } finally {
+            if (jedis != null) {
+                JedisManager.returnJedis(jedis);
+            }
+        }
+
     }
 }

@@ -23,8 +23,7 @@ public class JedisManager {
         config.setTestOnBorrow(true);
         config.setMaxTotal(200);
         config.setMaxIdle(50);
-        config.setTestWhileIdle(true);
-        config.setMaxWaitMillis(500);
+        config.setMaxWaitMillis(10000);
         jedisPool = new JedisPool(config, address);
     }
 
