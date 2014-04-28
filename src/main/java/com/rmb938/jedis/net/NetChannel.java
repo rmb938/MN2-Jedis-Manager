@@ -15,7 +15,11 @@ public enum NetChannel {
     //BUNGEE
     BUNGEE_TO_BUNGEE,
     BUNGEE_TO_SERVER,
-    BUNGEE_TO_SERVER_CONTROLLER;
+    BUNGEE_TO_SERVER_CONTROLLER,
+    BUNGEE_TO_SOCIAL_SERVER,
+
+    //SOCIAL SERVER
+    SOCIAL_SERVER_TO_SERVER;
 
     public static NetChannel getChannelFromName(String name) {
         for (NetChannel channel : NetChannel.values()) {
