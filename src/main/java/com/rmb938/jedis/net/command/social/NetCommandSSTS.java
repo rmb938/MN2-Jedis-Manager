@@ -8,7 +8,7 @@ import org.json.JSONException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NetCommandSSTS  extends NetCommand {
+public class NetCommandSSTS extends NetCommand {
 
     private final static Logger logger = Logger.getLogger(NetCommandSSTS.class.getName());
 

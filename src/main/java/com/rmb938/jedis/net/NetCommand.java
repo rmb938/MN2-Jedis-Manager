@@ -7,12 +7,19 @@ import org.json.JSONObject;
 import redis.clients.jedis.Jedis;
 
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class NetCommand {
 
     private final static Logger logger = Logger.getLogger(NetCommand.class.getName());
+    private final static ExecutorService executorService = Executors.newCachedThreadPool();
+
+    public static ExecutorService getExecutorService() {
+        return executorService;
+    }
 
     private final HashMap<String, Object> args;
     private final String name;
@@ -52,17 +59,21 @@ public abstract class NetCommand {
 
     public void flush() {
         addCommandInfo();
-        Jedis jedis = null;
-        try {
-            jedis = JedisManager.getJedis();
-            jedis.publish(netChannel.name(), jsonObject.toString());
-        } catch (Exception e) {
-            logger.severe("Unable to send NetCommand "+netChannel.name()+" Contents: "+jsonObject.toString());
-        } finally {
-            if (jedis != null) {
-                JedisManager.returnJedis(jedis);
+        NetCommand.getExecutorService().submit(new Runnable() {
+            @Override
+            public void run() {
+                Jedis jedis = null;
+                try {
+                    jedis = JedisManager.getJedis();
+                    jedis.publish(netChannel.name(), jsonObject.toString());
+                } catch (Exception e) {
+                    logger.severe("Unable to send NetCommand "+netChannel.name()+" Contents: "+jsonObject.toString());
+                } finally {
+                    if (jedis != null) {
+                        JedisManager.returnJedis(jedis);
+                    }
+                }
             }
-        }
-
+        });
     }
 }

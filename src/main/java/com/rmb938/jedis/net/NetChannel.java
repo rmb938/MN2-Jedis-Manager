@@ -19,7 +19,8 @@ public enum NetChannel {
     BUNGEE_TO_SOCIAL_SERVER,
 
     //SOCIAL SERVER
-    SOCIAL_SERVER_TO_SERVER;
+    SOCIAL_SERVER_TO_SERVER,
+    SOCIAL_SERVER_TO_BUNGEE;
 
     public static NetChannel getChannelFromName(String name) {
         for (NetChannel channel : NetChannel.values()) {
